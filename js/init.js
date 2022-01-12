@@ -6,47 +6,42 @@ const init = () => {
     console.log(setup);
     // mainDom can be imagined as "parent" main component in React, a state-ful one
     const mainDom = document.querySelector('#main');
-    // mainDom.innerHTML = 'aaaa';
-    // const testDom = document.createElement('div');
     setup.forEach(item => {
         // newItemDom can be then imagined as "child" components with no or little state functionality in React
-        const newItemDom = document.createElement('div');
-        newItemDom.className = 'menu-item';
-
-        const textIdDom = document.createElement('p');
-        textIdDom.innerText = item.id;
-        newItemDom.appendChild(textIdDom);
-
-        const textTitleDom = document.createElement('p');
-        textTitleDom.innerText = item.title;
-        newItemDom.appendChild(textTitleDom);
-
-        const textValueDom = document.createElement('p');
-        textValueDom.innerText = item.value;
-        newItemDom.appendChild(textValueDom);
-
-        const textDecriptionDom = document.createElement('p');
-        textDecriptionDom.innerText = item.decription;
-        newItemDom.appendChild(textDecriptionDom);
-
-        // subsections
-        item.subsections.forEach(innerItem => {
-            const textDom = document.createElement('p');
-            textDom.innerText = innerItem.title;
-            newItemDom.appendChild(textDom);
-        });
-
-        newItemDom.addEventListener('click', () => {
+        const itemDom = document.createElement('div');
+        itemDom.className = 'menu-item-grid show';
+        itemDom.addEventListener('click', () => {
             console.log(item.title);
-        })
-
-        mainDom.appendChild(newItemDom);
+            if (itemDom.className == 'menu-item-grid show') {
+                itemDom.className = 'menu-item-grid hide';
+            } else {
+                itemDom.className = 'menu-item-grid show';
+            }
+        });
+        let subsections = '';
+        item.subsections.forEach((innerItem, index) => {
+            let position = '';
+            const indexPosition = index % 4;
+            if (index == 0) {
+                position = 'dark';
+            } else if (indexPosition == 1 || indexPosition == 2) {
+                position = 'light';
+            } else if (indexPosition == 3 || indexPosition == 0) {
+                position = 'dark';
+            }
+            subsections += `<p class="menu-item-details subsection ${position}">${innerItem.title}</p>`;
+        });
+        let itemHTML = `
+            <div class="menu-item">
+                <p class="menu-item-details title">${item.title}</p>
+                <p class="menu-item-details value">${item.value}</p>
+                <p class="menu-item-details decription">${item.decription}</p>
+                ${subsections}
+            </div>
+        `;
+        itemDom.innerHTML = itemHTML;
+        mainDom.appendChild(itemDom);
     });
-    
-    
 };
 
 init();
-
-// total W: 787, H: 725.6
-// item W: 213, H: 307.4, padding: L, R: 52.3, inner: 368.1 - 307.4 - 39.8 (padding - T, B)

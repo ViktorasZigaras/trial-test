@@ -1,23 +1,23 @@
 <?php
     # intended to be used as a component
+    # <style><?php include './css/main.css'; ?></style>
+    # <script type="module" src="./js/init.js" defer></script>
+    # <div id="main"></div>
 ?>
-<style><?php include './css/main.css'; ?></style>
-<script type="module" src="./js/init.js" defer></script>
 
-<div id="main"></div>
-
-TO DO
-
-0. convert to more normal html structure
-
-1. limit area artificially
-
-2. display 6x data entries (reuse a template)
-
-3. find and impmelent special animations
-
-4. add and use bootstrap ("grid"???) https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_default&stacked=h
-
-5. review and test
-
-6. send
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="main"></div>
+    <script type="module" src="./js/init.js" defer></script>
+</body>
+</html>
