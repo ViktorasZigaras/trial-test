@@ -13,7 +13,7 @@ const init = () => {
         itemDom.addEventListener('click', () => {
             console.log(item.title);
             if (itemDom.className == 'menu-item-grid show') {
-                itemDom.className = 'menu-item-grid hide';
+                itemDom.className = 'menu-item-grid obscure';
             } else {
                 itemDom.className = 'menu-item-grid show';
             }
@@ -32,11 +32,13 @@ const init = () => {
             subsections += `<p class="menu-item-details subsection ${position}">${innerItem.title}</p>`;
         });
         let itemHTML = `
-            <div class="menu-item">
+            <div class="menu-item col-sm-4">
                 <p class="menu-item-details title">${item.title}</p>
                 <p class="menu-item-details value">${item.value}</p>
                 <p class="menu-item-details decription">${item.decription}</p>
-                ${subsections}
+                <div class="menu-item-subsections">
+                    ${subsections}
+                </div>
             </div>
         `;
         itemDom.innerHTML = itemHTML;
