@@ -9,13 +9,13 @@ const init = () => {
     setup.forEach(item => {
         // newItemDom can be then imagined as "child" components with no or little state functionality in React
         const itemDom = document.createElement('div');
-        itemDom.className = 'menu-item-grid show';
+        itemDom.className = 'menu-item show col-sm-4';
         itemDom.addEventListener('click', () => {
             console.log(item.title);
-            if (itemDom.className == 'menu-item-grid show') {
-                itemDom.className = 'menu-item-grid obscure';
+            if (itemDom.className == 'menu-item show col-sm-4') {
+                itemDom.className = 'menu-item obscure col-sm-4';
             } else {
-                itemDom.className = 'menu-item-grid show';
+                itemDom.className = 'menu-item show col-sm-4';
             }
         });
         let subsections = '';
@@ -29,16 +29,20 @@ const init = () => {
             } else if (indexPosition == 3 || indexPosition == 0) {
                 position = 'dark';
             }
-            subsections += `<p class="menu-item-details subsection ${position}">${innerItem.title}</p>`;
+            subsections += `
+                <div class="menu-item-subsection col-sm-6">
+                    <p class="menu-item-details subsection ${position}">
+                        ${innerItem.title}
+                    </p>
+                </div>
+            `;
         });
         let itemHTML = `
-            <div class="menu-item col-sm-4">
-                <p class="menu-item-details title">${item.title}</p>
-                <p class="menu-item-details value">${item.value}</p>
-                <p class="menu-item-details decription">${item.decription}</p>
-                <div class="menu-item-subsections">
-                    ${subsections}
-                </div>
+            <p class="menu-item-details title">${item.title}</p>
+            <p class="menu-item-details value">${item.value}</p>
+            <p class="menu-item-details decription">${item.decription}</p>
+            <div class="menu-item-subsection-container col-sm-12">
+                ${subsections}
             </div>
         `;
         itemDom.innerHTML = itemHTML;
