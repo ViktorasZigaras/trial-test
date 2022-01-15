@@ -9,13 +9,15 @@ const init = () => {
     setup.forEach(item => {
         // newItemDom can be then imagined as "child" components with no or little state functionality in React
         const itemDom = document.createElement('div');
-        itemDom.className = 'menu-item show col-sm-4';
+        // following class manipulations could probably be done better, but I need time to optimize this code better
+        const menuItemSizes = 'menu-item col-xs-12 col-sm-6 col-md-4';
+        itemDom.className = menuItemSizes + ' show';
         itemDom.addEventListener('click', () => {
             console.log(item.title);
-            if (itemDom.className == 'menu-item show col-sm-4') {
-                itemDom.className = 'menu-item obscure col-sm-4';
+            if (itemDom.className == menuItemSizes + ' show') {
+                itemDom.className = menuItemSizes + ' obscure';
             } else {
-                itemDom.className = 'menu-item show col-sm-4';
+                itemDom.className = menuItemSizes + ' show';
             }
         });
         let subsections = '';
@@ -38,11 +40,15 @@ const init = () => {
             `;
         });
         let itemHTML = `
-            <p class="menu-item-details title">${item.title}</p>
-            <p class="menu-item-details value">${item.value}</p>
-            <p class="menu-item-details decription">${item.decription}</p>
-            <div class="menu-item-subsection-container col-sm-12">
-                ${subsections}
+            <div class="menu-item-margins col-sm-12">
+                <div class="menu-item-body col-sm-12">
+                    <p class="menu-item-details title">${item.title}</p>
+                    <p class="menu-item-details value">${item.value}</p>
+                    <p class="menu-item-details decription">${item.decription}</p>
+                    <div class="menu-item-subsection-container col-sm-12">
+                        ${subsections}
+                    </div>
+                </div>
             </div>
         `;
         itemDom.innerHTML = itemHTML;
